@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acro.BusinessLogic.Implementations;
+using Acro.BusinessLogic.Interfaces;
+using Acro.Common;
+using Acro.Data.Implementations;
+using Acro.Data.Interfaces;
+using Acro.Data.StoredProcs;
 using Acro.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +40,16 @@ namespace Acro.WebApi
             {
 	            c.SwaggerDoc("v1", new Info { Title = "ACRO API (DEV)", Version = "v1" });
             });
-		}
+
+            services.AddScoped<IProductBusinessLogic, ProductBusinessLogic>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<StoredProcWrapper>();
+
+            services.AddSingleton<DbSettings>(new DbSettings()
+            {
+				ConnectionString = this.Configuration.GetConnectionString("DefaultConnection")
+			});
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

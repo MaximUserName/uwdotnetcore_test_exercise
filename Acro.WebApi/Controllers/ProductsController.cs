@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Acro.BusinessLogic.Dto;
+using Acro.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Acro.WebApi.Controllers
@@ -10,31 +11,43 @@ namespace Acro.WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+	    private readonly IProductBusinessLogic _productBusinessLogic;
+
+	    public ProductsController(IProductBusinessLogic productBusinessLogic)
+	    {
+		    _productBusinessLogic = productBusinessLogic;
+	    }
+
         [HttpGet]
         public IEnumerable<ProductDto> Get([FromQuery]ProductsFilter filter)
         {
-            return Enumerable.Empty<ProductDto>();
+            return _productBusinessLogic.Get(filter);
         }
 
         [HttpGet("{id}")]
         public ProductDto Get(int id)
         {
-            return new ProductDto();
-        }
+            return _productBusinessLogic.GetOne(id);
+		}
 
         [HttpPost]
-        public void Post([FromBody] CreateProductDto product)
+        public IActionResult Post([FromBody] CreateProductDto product)
         {
+	        return this.Created(string.Empty, _productBusinessLogic.AddNew(product));
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] UpdateProductDto product)
+        public IActionResult Put(int id, [FromBody] UpdateProductDto product)
         {
+	        product.ProductID = id;
+	        return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+		[HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-        }
-    }
+			_productBusinessLogic.Delete(id);
+	        return NoContent();
+		}
+	}
 }
