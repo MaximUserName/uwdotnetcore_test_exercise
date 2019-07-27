@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Acro.Common\Acro.Common.csproj" />
   </ItemGroup>
 

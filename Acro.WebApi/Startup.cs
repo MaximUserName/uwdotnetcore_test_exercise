@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acro.BusinessLogic;
 using Acro.BusinessLogic.Implementations;
 using Acro.BusinessLogic.Interfaces;
 using Acro.Common;
@@ -41,9 +42,7 @@ namespace Acro.WebApi
 	            c.SwaggerDoc("v1", new Info { Title = "ACRO API (DEV)", Version = "v1" });
             });
 
-            services.AddScoped<IProductBusinessLogic, ProductBusinessLogic>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<StoredProcWrapper>();
+            services.AddAcroServices();
 
             services.AddSingleton<DbSettings>(new DbSettings()
             {

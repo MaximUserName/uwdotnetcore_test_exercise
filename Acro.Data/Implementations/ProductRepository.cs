@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acro.Data.Interfaces;
 using Acro.Data.StoredProcs;
 
@@ -20,8 +21,14 @@ namespace Acro.Data.Implementations
 
 		public IEnumerable<ProductDo> GetAllProducts()
 		{
-			throw new System.NotImplementedException();
+			return _storedProcWrapper.GetByStoredProc<ProductDo>();
 		}
+
+		public ProductDo GetOne(int id)
+		{
+			return _storedProcWrapper.GetByStoredProc<ProductDo>().FirstOrDefault();
+		}
+
 
 		public ProductDo AddNew()
 		{
