@@ -90,8 +90,8 @@
 		{
 			"name": "DeleteProduct",
 			"request": {
-				"url": "{apiUrl}/api/products/1",
-				"method": "GET",
+				"url": "http://localhost:5000/api/products/80",
+				"method": "DELETE",
 				"header": [
 					{
 						"key": "Content-Type",
