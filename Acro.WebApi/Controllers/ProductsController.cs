@@ -40,6 +40,7 @@ namespace Acro.WebApi.Controllers
         public IActionResult Put(int id, [FromBody] UpdateProductDto product)
         {
 	        product.ProductID = id;
+	        _productBusinessLogic.Update(product);
 	        return NoContent();
         }
 

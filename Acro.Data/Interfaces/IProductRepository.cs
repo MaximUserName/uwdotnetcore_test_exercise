@@ -7,8 +7,8 @@ namespace Acro.Data.Interfaces
 		IEnumerable<ProductDo> GetActiveProducts();
 		IEnumerable<ProductDo> GetAllProducts();
 		ProductDo GetOne(int id);
-		ProductDo AddNew();
-		void Update();
+		int AddNew(ProductDo product);
+		void Update(ProductDo product);
 		void Delete(int id);
 	}
 }

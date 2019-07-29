@@ -1,4 +1,7 @@
-﻿namespace Acro.Data.StoredProcs
+﻿using System.Reflection.Metadata.Ecma335;
+using Acro.Data.Implementations;
+
+namespace Acro.Data.StoredProcs
 {
 	public static class SpProducts
 	{
@@ -14,5 +17,22 @@
 		{
 
 		}
+
+		public static StoredProcedureParametersBase SelectOne()
+		{
+			return new StoredProcedureParametersBase()
+			{
+				Action = ActionSelectOne,
+			};
+		}
+	}
+
+	public class SpParametersBuilder
+	{
+		public StoredProcedureParametersBase Build()
+		{
+			return new StoredProcedureParametersBase();
+		}
 	}
 }
+

@@ -12,6 +12,8 @@ namespace Acro.BusinessLogic.MapperProfiles
 		public ProductProfile()
 		{
 			this.CreateMap<ProductDo, ProductDto>();
+			this.CreateMap<CreateProductDto, ProductDo>();
+			this.CreateMap<UpdateProductDto, ProductDo>();
 		}
 	}
 }

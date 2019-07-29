@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Acro.Common;
+using Acro.Data.Implementations;
 using Dapper;
 
 namespace Acro.Data.StoredProcs
@@ -21,7 +22,7 @@ namespace Acro.Data.StoredProcs
 			return new SqlConnection(_connectionString);
 		}
 
-		public IEnumerable<T> GetByStoredProc<T>()
+		public IEnumerable<T> GetMany<T>()
 		{
 			using (var conn = CreateConnection())
 			{
@@ -29,6 +30,40 @@ namespace Acro.Data.StoredProcs
 				return conn.Query<T>(SpProducts.Name, 
 					commandType: CommandType.StoredProcedure,
 					param: new { Action = SpProducts.ActionSelectAll });
+			}
+		}
+
+		public IEnumerable<T> Execute<T>(StoredProcedureParametersBase parameters)
+		{
+			using (var conn = CreateConnection())
+			{
+				conn.Open();
+				return conn.Query<T>(parameters.StoredProcName,
+					commandType: CommandType.StoredProcedure,
+					param: parameters.Params);
+					//param: new { Action = SpProducts.ActionSelectAll });
+			}
+		}
+
+		public T ExecuteOne<T>(StoredProcedureParametersBase parameters)
+		{
+			using (var conn = CreateConnection())
+			{
+				conn.Open();
+				return conn.QueryFirstOrDefault<T>(parameters.StoredProcName,
+					commandType: CommandType.StoredProcedure,
+					param: parameters.Params);
+			}
+		}
+
+		public void ExecuteNonQuery(StoredProcedureParametersBase parameters)
+		{
+			using (var conn = CreateConnection())
+			{
+				conn.Open();
+				conn.Execute(parameters.StoredProcName,
+					commandType: CommandType.StoredProcedure,
+					param: parameters.Params);
 			}
 		}
 	}

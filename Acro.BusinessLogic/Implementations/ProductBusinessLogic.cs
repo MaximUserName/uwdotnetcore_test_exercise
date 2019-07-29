@@ -38,22 +38,25 @@ namespace Acro.BusinessLogic.Implementations
 		
 		public ProductDto GetOne(int id)
 		{
-			var product = _productRepository.G
+			var product = _productRepository.GetOne(id);
+			return _mapper.Map<ProductDto>(product);
 		}
 
 		public ProductDto AddNew(CreateProductDto product)
 		{
-			throw new NotImplementedException();
+			var id = _productRepository.AddNew(_mapper.Map<ProductDo>(product));
+			return GetOne(id);
 		}
 
 		public ProductDto Update(UpdateProductDto product)
 		{
-			throw new NotImplementedException();
+			_productRepository.Update(_mapper.Map<ProductDo>(product));
+			return GetOne(product.ProductID);
 		}
 
 		public void Delete(int id)
 		{
-			throw new NotImplementedException();
+			_productRepository.Delete(id);
 		}
 
 		#endregion

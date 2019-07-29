@@ -16,33 +16,93 @@ namespace Acro.Data.Implementations
 
 		public IEnumerable<ProductDo> GetActiveProducts()
 		{
-			throw new System.NotImplementedException();
+			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new {Action = SpProducts.ActionSelectActive}
+			});
 		}
 
 		public IEnumerable<ProductDo> GetAllProducts()
 		{
-			return _storedProcWrapper.GetByStoredProc<ProductDo>();
+			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new { Action = SpProducts.ActionSelectAll }
+			});
 		}
 
 		public ProductDo GetOne(int id)
 		{
-			return _storedProcWrapper.GetByStoredProc<ProductDo>().FirstOrDefault();
+			return _storedProcWrapper.ExecuteOne<ProductDo>(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new { Action = SpProducts.ActionSelectOne, ProductID = id }
+			});
 		}
 
-
-		public ProductDo AddNew()
+		public int AddNew(ProductDo product)
 		{
-			throw new System.NotImplementedException();
+			return _storedProcWrapper.ExecuteOne<int>(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new
+				{
+					Action = SpProducts.ActionAddNew,
+					product.ProductName,
+					product.SupplierID,
+					product.CategoryID,
+					product.QuantityPerUnit,
+					product.UnitPrice,
+					product.UnitsInStock,
+					UnitsOnOrder = product.UnitsOnOrder,
+					product.ReorderLevel,
+					product.Discontinued,
+				}
+			});
 		}
 
-		public void Update()
+		public void Update(ProductDo product)
 		{
-			throw new System.NotImplementedException();
+			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new
+				{
+					Action = SpProducts.ActionUpdate,
+					product.ProductID,
+					product.ProductName,
+					product.SupplierID,
+					product.CategoryID,
+					product.QuantityPerUnit,
+					product.UnitPrice,
+					product.UnitsInStock,
+					UnitsOnOrder = product.UnitsOnOrder,
+					product.ReorderLevel,
+					product.Discontinued,
+				}
+			});
 		}
+
 
 		public void Delete(int id)
 		{
-			throw new System.NotImplementedException();
+			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParametersBase()
+			{
+				StoredProcName = SpProducts.Name,
+				Params = new
+				{
+					Action = SpProducts.ActionDelete,
+					ProductID = id
+				}
+			});
 		}
+	}
+
+	public class StoredProcedureParametersBase
+	{
+		public string StoredProcName { get; set; }
+		public object Params { get; set; }
+		public string Action { get; set; }
 	}
 }
