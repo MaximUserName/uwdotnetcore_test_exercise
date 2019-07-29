@@ -12,27 +12,6 @@ namespace Acro.Data.StoredProcs
 		public static string ActionAddNew = "AddNew";
 		public static string ActionUpdate = "Update";
 		public static string ActionDelete = "Delete";
-
-		public static class Parameters
-		{
-
-		}
-
-		public static StoredProcedureParametersBase SelectOne()
-		{
-			return new StoredProcedureParametersBase()
-			{
-				Action = ActionSelectOne,
-			};
-		}
-	}
-
-	public class SpParametersBuilder
-	{
-		public StoredProcedureParametersBase Build()
-		{
-			return new StoredProcedureParametersBase();
-		}
 	}
 }
 

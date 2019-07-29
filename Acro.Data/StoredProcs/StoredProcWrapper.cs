@@ -33,7 +33,7 @@ namespace Acro.Data.StoredProcs
 			}
 		}
 
-		public IEnumerable<T> Execute<T>(StoredProcedureParametersBase parameters)
+		public IEnumerable<T> Execute<T>(StoredProcedureParameters parameters)
 		{
 			using (var conn = CreateConnection())
 			{
@@ -45,7 +45,7 @@ namespace Acro.Data.StoredProcs
 			}
 		}
 
-		public T ExecuteOne<T>(StoredProcedureParametersBase parameters)
+		public T ExecuteOne<T>(StoredProcedureParameters parameters)
 		{
 			using (var conn = CreateConnection())
 			{
@@ -56,7 +56,7 @@ namespace Acro.Data.StoredProcs
 			}
 		}
 
-		public void ExecuteNonQuery(StoredProcedureParametersBase parameters)
+		public void ExecuteNonQuery(StoredProcedureParameters parameters)
 		{
 			using (var conn = CreateConnection())
 			{

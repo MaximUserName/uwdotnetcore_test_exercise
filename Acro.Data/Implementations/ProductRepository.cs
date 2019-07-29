@@ -16,7 +16,7 @@ namespace Acro.Data.Implementations
 
 		public IEnumerable<ProductDo> GetActiveProducts()
 		{
-			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParametersBase()
+			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new {Action = SpProducts.ActionSelectActive}
@@ -25,7 +25,7 @@ namespace Acro.Data.Implementations
 
 		public IEnumerable<ProductDo> GetAllProducts()
 		{
-			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParametersBase()
+			return _storedProcWrapper.Execute<ProductDo>(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new { Action = SpProducts.ActionSelectAll }
@@ -34,7 +34,7 @@ namespace Acro.Data.Implementations
 
 		public ProductDo GetOne(int id)
 		{
-			return _storedProcWrapper.ExecuteOne<ProductDo>(new StoredProcedureParametersBase()
+			return _storedProcWrapper.ExecuteOne<ProductDo>(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new { Action = SpProducts.ActionSelectOne, ProductID = id }
@@ -43,7 +43,7 @@ namespace Acro.Data.Implementations
 
 		public int AddNew(ProductDo product)
 		{
-			return _storedProcWrapper.ExecuteOne<int>(new StoredProcedureParametersBase()
+			return _storedProcWrapper.ExecuteOne<int>(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new
@@ -64,7 +64,7 @@ namespace Acro.Data.Implementations
 
 		public void Update(ProductDo product)
 		{
-			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParametersBase()
+			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new
@@ -87,7 +87,7 @@ namespace Acro.Data.Implementations
 
 		public void Delete(int id)
 		{
-			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParametersBase()
+			_storedProcWrapper.ExecuteNonQuery(new StoredProcedureParameters()
 			{
 				StoredProcName = SpProducts.Name,
 				Params = new
@@ -99,10 +99,9 @@ namespace Acro.Data.Implementations
 		}
 	}
 
-	public class StoredProcedureParametersBase
+	public class StoredProcedureParameters
 	{
 		public string StoredProcName { get; set; }
 		public object Params { get; set; }
-		public string Action { get; set; }
 	}
 }
