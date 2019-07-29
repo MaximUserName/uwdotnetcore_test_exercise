@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />-->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.7.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acro.BusinessLogic\Acro.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Acro.WebApi\Acro.WebApi.csproj" />
+  </ItemGroup>
+
+</Project>
