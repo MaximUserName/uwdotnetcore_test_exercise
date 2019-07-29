@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using Acro.BusinessLogic.Dto;
 using Acro.BusinessLogic.Interfaces;
+using Acro.BusinessLogic.Validators;
 using Acro.Data;
 using Acro.Data.Interfaces;
 using AutoMapper;
+using FluentValidation;
 
 namespace Acro.BusinessLogic.Implementations
 {
@@ -15,15 +17,21 @@ namespace Acro.BusinessLogic.Implementations
 
 		private readonly IProductRepository _productRepository;
 		private readonly IMapper _mapper;
+		private readonly IValidator<CreateProductDto> _createProductValidator;
+		private readonly IValidator<UpdateProductDto> _updateProductValidator;
 
 		#endregion
 
 		#region Ctor
 
-		public ProductBusinessLogic(IProductRepository productRepository, IMapper mapper)
+		public ProductBusinessLogic(IProductRepository productRepository, IMapper mapper,
+			IValidator<CreateProductDto> createProductValidator,
+			IValidator<UpdateProductDto> updateProductValidator)
 		{
 			_productRepository = productRepository;
 			_mapper = mapper;
+			_createProductValidator = createProductValidator;
+			_updateProductValidator = updateProductValidator;
 		}
 
 		#endregion
@@ -44,12 +52,14 @@ namespace Acro.BusinessLogic.Implementations
 
 		public ProductDto AddNew(CreateProductDto product)
 		{
+			_createProductValidator.ValidateAndThrow(product);
 			var id = _productRepository.AddNew(_mapper.Map<ProductDo>(product));
 			return GetOne(id);
 		}
 
 		public ProductDto Update(UpdateProductDto product)
 		{
+			_updateProductValidator.ValidateAndThrow(product);
 			_productRepository.Update(_mapper.Map<ProductDo>(product));
 			return GetOne(product.ProductID);
 		}

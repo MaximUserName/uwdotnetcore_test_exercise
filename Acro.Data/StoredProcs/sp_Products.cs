@@ -1,7 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Acro.Data.Implementations;
-
-namespace Acro.Data.StoredProcs
+﻿namespace Acro.Data.StoredProcs
 {
 	public static class SpProducts
 	{

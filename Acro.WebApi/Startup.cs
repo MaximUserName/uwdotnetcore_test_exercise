@@ -10,6 +10,7 @@ using Acro.Data.Implementations;
 using Acro.Data.Interfaces;
 using Acro.Data.StoredProcs;
 using Acro.WebApi.Infrastructure;
+using Acro.WebApi.Infrastructure.ExceptionHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -53,7 +54,8 @@ namespace Acro.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-	        app.UseStaticFiles();
+	        app.UseMiddleware<ExceptionHandlerMiddleware>();
+			app.UseStaticFiles();
 	        // global cors policy
 	        app.UseCors(x => x
 		        .AllowAnyOrigin()

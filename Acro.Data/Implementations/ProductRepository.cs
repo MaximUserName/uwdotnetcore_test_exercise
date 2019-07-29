@@ -55,7 +55,7 @@ namespace Acro.Data.Implementations
 					product.QuantityPerUnit,
 					product.UnitPrice,
 					product.UnitsInStock,
-					UnitsOnOrder = product.UnitsOnOrder,
+					product.UnitsOnOrder,
 					product.ReorderLevel,
 					product.Discontinued,
 				}
@@ -77,7 +77,7 @@ namespace Acro.Data.Implementations
 					product.QuantityPerUnit,
 					product.UnitPrice,
 					product.UnitsInStock,
-					UnitsOnOrder = product.UnitsOnOrder,
+					product.UnitsOnOrder,
 					product.ReorderLevel,
 					product.Discontinued,
 				}
@@ -97,11 +97,5 @@ namespace Acro.Data.Implementations
 				}
 			});
 		}
-	}
-
-	public class StoredProcedureParameters
-	{
-		public string StoredProcName { get; set; }
-		public object Params { get; set; }
 	}
 }

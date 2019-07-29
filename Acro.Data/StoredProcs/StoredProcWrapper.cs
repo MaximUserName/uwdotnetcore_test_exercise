@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Acro.Common;
@@ -22,17 +21,6 @@ namespace Acro.Data.StoredProcs
 			return new SqlConnection(_connectionString);
 		}
 
-		public IEnumerable<T> GetMany<T>()
-		{
-			using (var conn = CreateConnection())
-			{
-				conn.Open();
-				return conn.Query<T>(SpProducts.Name, 
-					commandType: CommandType.StoredProcedure,
-					param: new { Action = SpProducts.ActionSelectAll });
-			}
-		}
-
 		public IEnumerable<T> Execute<T>(StoredProcedureParameters parameters)
 		{
 			using (var conn = CreateConnection())
@@ -41,7 +29,6 @@ namespace Acro.Data.StoredProcs
 				return conn.Query<T>(parameters.StoredProcName,
 					commandType: CommandType.StoredProcedure,
 					param: parameters.Params);
-					//param: new { Action = SpProducts.ActionSelectAll });
 			}
 		}
 
