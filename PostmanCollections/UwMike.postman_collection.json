@@ -1,0 +1,151 @@
+{
+	"variables": [],
+	"info": {
+		"name": "UwMike",
+		"_postman_id": "87e63c7d-122f-d4ca-d06e-ccd06d5c35c9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateProduct",
+			"request": {
+				"url": "http://localhost:5000/api/products",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productName\": \"New Product\",\r\n  \"supplierID\": 1,\r\n  \"categoryID\": 1,\r\n  \"quantityPerUnit\": \"2x3\",\r\n  \"unitPrice\": 3,\r\n  \"unitsInStock\": 4,\r\n  \"unitsOnOrder\": 2,\r\n  \"reorderLevel\": 0,\r\n  \"discontinued\": true\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetProducts",
+			"request": {
+				"url": {
+					"raw": "http://localhost:5000/api/products?isActive=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "isActive",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductById",
+			"request": {
+				"url": "http://localhost:5000/api/products/80",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"url": "{apiUrl}/api/products/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateProduct_WithValidation",
+			"request": {
+				"url": "http://localhost:5000/api/products",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productName\": \"\",\r\n  \"supplierID\": 1,\r\n  \"categoryID\": 1,\r\n  \"quantityPerUnit\": \"2x3\",\r\n  \"unitPrice\": 3,\r\n  \"unitsInStock\": 4,\r\n  \"unitsOnOrder\": 2,\r\n  \"reorderLevel\": 0,\r\n  \"discontinued\": true\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProduct",
+			"request": {
+				"url": "http://localhost:5000/api/products/80",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productName\": \"New Product Updated\",\r\n  \"supplierID\": 2,\r\n  \"categoryID\": 2,\r\n  \"quantityPerUnit\": \"2x8\",\r\n  \"unitPrice\": 7,\r\n  \"unitsInStock\": 7,\r\n  \"unitsOnOrder\": 7,\r\n  \"reorderLevel\": 0,\r\n  \"discontinued\": false\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
