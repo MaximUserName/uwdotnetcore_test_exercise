@@ -3,7 +3,6 @@ using Acro.BusinessLogic.Dto;
 using Acro.BusinessLogic.Implementations;
 using Acro.BusinessLogic.Validators;
 using Acro.Data.Interfaces;
-using Acro.WebApi.Controllers;
 using AutoMapper;
 using FluentValidation;
 using Moq;
@@ -17,7 +16,6 @@ namespace Acro.UnitTests
         [Test]
         public void ProductEmptyName_ShouldThrow()
         {
-			
 			// Arrange
 			var sut = new ProductBusinessLogic(
 				Mock.Of<IProductRepository>(),
